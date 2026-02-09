@@ -464,7 +464,7 @@
 
       <section class="section">
         <h2>תרגול עצמי 🎯</h2>
-        <div class="grid two">
+        <div class="grid two" id="exercise-grid">
           <div class="exercise">
             <label for="q1">תרגיל 1: כתבו 3 בספרות רומיות</label>
             <input id="q1" type="text" placeholder="הקלידו כאן" data-expected="III" data-kind="roman" />
@@ -658,6 +658,7 @@
             <div class="exercise-feedback" aria-live="polite"></div>
           </div>
         </div>
+        <button class="btn" id="more-exercises" type="button">עוד תרגילים</button>
       </section>
 
       <p class="footer-note">סיימתם? נסו לכתוב את שנת הלידה שלכם בספרות רומיות!</p>
@@ -682,6 +683,18 @@
         [1, "I"],
       ];
 
+      const fromRoman = (value) => {
+        let remaining = value.trim().toUpperCase();
+        let total = 0;
+        romanPairs.forEach(([number, symbol]) => {
+          while (remaining.startsWith(symbol)) {
+            total += number;
+            remaining = remaining.slice(symbol.length);
+          }
+        });
+        return remaining.length === 0 ? total : NaN;
+      };
+
       const toRoman = (number) => {
         let result = "";
         let remaining = number;
@@ -694,7 +707,7 @@
         return result;
       };
 
-      document.querySelectorAll(".hint-btn").forEach((button) => {
+      const setupHintButton = (button) => {
         button.addEventListener("click", () => {
           const exercise = button.closest(".exercise");
           const hint = exercise ? exercise.querySelector(".hint") : null;
@@ -704,9 +717,9 @@
           const isHidden = hint.classList.toggle("is-hidden");
           button.setAttribute("aria-expanded", String(!isHidden));
         });
-      });
+      };
 
-      document.querySelectorAll(".check-btn").forEach((button) => {
+      const setupCheckButton = (button) => {
         button.addEventListener("click", () => {
           const exercise = button.closest(".exercise");
           const input = exercise.querySelector("input[data-expected]");
@@ -725,7 +738,10 @@
             feedback.className = "exercise-feedback bad";
           }
         });
-      });
+      };
+
+      document.querySelectorAll(".hint-btn").forEach(setupHintButton);
+      document.querySelectorAll(".check-btn").forEach(setupCheckButton);
 
       const convertInput = document.getElementById("convert-input");
       const convertButton = document.getElementById("convert-btn");
@@ -742,6 +758,79 @@
           convertOutput.textContent = `התוצאה: ${toRoman(value)}`;
           convertOutput.className = "feedback good";
         });
+      }
+
+      const exerciseGrid = document.getElementById("exercise-grid");
+      const moreExercisesButton = document.getElementById("more-exercises");
+      const extraNumbers = [
+        2, 6, 8, 11, 13, 15, 17, 18, 21, 22, 26, 28, 29, 31, 33, 37, 41, 44, 47,
+        52, 56, 61, 66, 71, 76, 81, 86, 91, 97, 101, 118, 149, 207, 318, 462, 575,
+        642, 999, 1483, 2024, 2765, 3888,
+      ];
+      let extraIndex = 25;
+
+      const buildExercise = (index, number, toRomanQuestion) => {
+        const exercise = document.createElement("div");
+        exercise.className = "exercise";
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        const hint = document.createElement("div");
+        const feedback = document.createElement("div");
+        const hintButton = document.createElement("button");
+        const checkButton = document.createElement("button");
+        const roman = toRoman(number);
+
+        label.setAttribute("for", `q${index}`);
+        hint.className = "hint is-hidden";
+        feedback.className = "exercise-feedback";
+        feedback.setAttribute("aria-live", "polite");
+
+        hintButton.type = "button";
+        hintButton.className = "hint-btn";
+        hintButton.setAttribute("aria-expanded", "false");
+        hintButton.textContent = "רמז";
+
+        checkButton.type = "button";
+        checkButton.className = "check-btn";
+        checkButton.textContent = "בדוק תשובה";
+
+        input.id = `q${index}`;
+        input.type = "text";
+        input.placeholder = "הקלידו כאן";
+
+        if (toRomanQuestion) {
+          label.textContent = `תרגיל ${index}: כתבו ${number.toLocaleString("he-IL")} בספרות רומיות`;
+          input.dataset.expected = roman;
+          input.dataset.kind = "roman";
+          hint.textContent = "רמז: מפרקים לאלפים, מאות, עשרות ויחידות ומחברים.";
+        } else {
+          label.textContent = `תרגיל ${index}: מה הערך של ${roman}?`;
+          input.dataset.expected = String(number);
+          input.dataset.kind = "number";
+          hint.textContent = "רמז: קוראים משמאל לימין ומחברים, אלא אם יש חיסור.";
+        }
+
+        exercise.append(label, input, hintButton, checkButton, hint, feedback);
+        setupHintButton(hintButton);
+        setupCheckButton(checkButton);
+        return exercise;
+      };
+
+      const addMoreExercises = (count = 4) => {
+        if (!exerciseGrid) {
+          return;
+        }
+        for (let i = 0; i < count; i += 1) {
+          const number = extraNumbers[(extraIndex + i) % extraNumbers.length];
+          const toRomanQuestion = (extraIndex + i) % 2 === 0;
+          const exercise = buildExercise(extraIndex + i, number, toRomanQuestion);
+          exerciseGrid.appendChild(exercise);
+        }
+        extraIndex += count;
+      };
+
+      if (moreExercisesButton) {
+        moreExercisesButton.addEventListener("click", () => addMoreExercises(4));
       }
     </script>
   </body>
