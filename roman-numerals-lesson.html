@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>שיעור כיפי: ספרות רומיות</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: only light;
+        --bg-1: #fef1d8;
+        --bg-2: #dff4ff;
+        --ink: #1b1b1f;
+        --accent: #ff8c5a;
+        --accent-2: #2f80ed;
+        --accent-3: #12b886;
+        --card: #ffffff;
+        --shadow: 0 14px 30px rgba(17, 24, 39, 0.15);
+        --radius: 22px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Rubik", "Varela Round", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.85), transparent 45%),
+          radial-gradient(circle at 85% 10%, rgba(255, 229, 212, 0.7), transparent 40%),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2));
+        min-height: 100vh;
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+
+      .hero {
+        background: var(--card);
+        padding: 28px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+        margin: 0 0 12px;
+      }
+
+      .hero p {
+        margin: 0 0 18px;
+        line-height: 1.6;
+      }
+
+      .hero .pill {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        border: 4px solid #fff5;
+        box-shadow: 0 12px 25px rgba(255, 140, 90, 0.25);
+      }
+
+      .section {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+        margin-bottom: 22px;
+      }
+
+      .section h2 {
+        margin: 0 0 12px;
+        font-size: 1.6rem;
+        color: var(--accent-2);
+      }
+
+      .tagline {
+        display: inline-block;
+        background: #ffe7d5;
+        color: #8a3b1f;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .rule {
+        background: #f5fbff;
+        border: 2px dashed #b9ddff;
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      .rule strong {
+        color: var(--accent-3);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-weight: 600;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        border-bottom: 2px solid #eef1f5;
+        text-align: center;
+      }
+
+      th {
+        background: #fff5dd;
+        color: #7c4a00;
+      }
+
+      .examples {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        background: #f1f8f5;
+        border-radius: 14px;
+        padding: 12px;
+        text-align: center;
+        font-weight: 600;
+        border: 1px solid #c7e9d8;
+      }
+
+      .exercise {
+        background: #fff9f1;
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid #ffe0c0;
+      }
+
+      .exercise label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .exercise input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 2px solid #ffd2b3;
+        font-size: 1rem;
+      }
+
+      .check-btn {
+        margin-top: 10px;
+        background: var(--accent-2);
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-inline-start: 8px;
+      }
+
+      .hint-btn {
+        margin-top: 10px;
+        background: #ffe7d5;
+        color: #8a3b1f;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .hint {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        color: #7c4a00;
+      }
+
+      .hint.is-hidden {
+        display: none;
+      }
+
+      .exercise-feedback {
+        margin-top: 10px;
+        font-weight: 600;
+      }
+
+      .exercise-feedback.good {
+        color: #0f766e;
+      }
+
+      .exercise-feedback.bad {
+        color: #b91c1c;
+      }
+
+      .btn {
+        margin-top: 14px;
+        background: var(--accent-2);
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .feedback {
+        margin-top: 12px;
+        font-weight: 600;
+      }
+
+      .feedback.good {
+        color: #0f766e;
+      }
+
+      .feedback.bad {
+        color: #b91c1c;
+      }
+
+      .aside {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .aside img {
+        width: 100%;
+        border-radius: 18px;
+        border: 4px solid #fff5;
+        box-shadow: 0 12px 25px rgba(47, 128, 237, 0.2);
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-top: 24px;
+        font-weight: 600;
+        color: #6b7280;
+      }
+
+      @media (max-width: 800px) {
+        header {
+          grid-template-columns: 1fr;
+        }
+
+        .aside {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="hero">
+          <span class="pill">ברוכים הבאים למסע בזמן!</span>
+          <h1>שיעור כיפי: ספרות רומיות</h1>
+          <p>
+            נלמד איך הרומאים ספרו, למה הם השתמשו באותיות במקום מספרים,
+            ואיך גם היום אפשר לראות ספרות רומיות בשעונים, בסרטים ובבניינים.
+          </p>
+          <p class="tagline">מתאים לגילאי 10-12 · זמן למידה: 20-30 דקות</p>
+        </div>
+        <img
+          src="output/imagegen/roman-hero.png"
+          alt="איור כיפי של כיתה רומאית צבעונית"
+        />
+      </header>
+
+      <section class="section">
+        <h2>מאיפה זה התחיל?</h2>
+        <div class="grid two">
+          <div>
+            הרומאים הקדומים חיו לפני יותר מ-2,000 שנה. הם השתמשו בסימנים פשוטים
+            כדי לספור חיילים, סחורות וזמן. במקום ספרות כמו שאנחנו מכירים, הם
+            השתמשו באותיות לטיניות: I, V, X ועוד.
+          </div>
+          <div class="rule">
+            <strong>זוכרים:</strong> ספרות רומיות הן לא אותיות קסם — הן פשוט
+            סימנים שסוכמים או מחסרים אחד מהשני.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>מפת האותיות</h2>
+        <p>הנה הערכים החשובים ביותר:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>ספרה</th>
+              <th>ערך</th>
+              <th>טריק זיכרון</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>I</td>
+              <td>1</td>
+              <td>קו אחד</td>
+            </tr>
+            <tr>
+              <td>V</td>
+              <td>5</td>
+              <td>כף יד פתוחה</td>
+            </tr>
+            <tr>
+              <td>X</td>
+              <td>10</td>
+              <td>שתי כפות ידיים</td>
+            </tr>
+            <tr>
+              <td>L</td>
+              <td>50</td>
+              <td>חצי מ-100</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>100</td>
+              <td>מאה = Century</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>500</td>
+              <td>חצי מאלף</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>1000</td>
+              <td>מיליון קטן</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>חוקים פשוטים</h2>
+        <div class="grid two">
+          <div class="rule">
+            <strong>סכימה:</strong> כאשר אות גדולה יותר אחרי אות קטנה — מוסיפים.
+            למשל: VI = 5 + 1 = 6.
+          </div>
+          <div class="rule">
+            <strong>חיסור:</strong> כאשר אות קטנה לפני אות גדולה — מחסרים.
+            למשל: IV = 5 - 1 = 4.
+          </div>
+          <div class="rule">
+            <strong>לא יותר משלוש:</strong> לא כותבים יותר משלוש אותיות זהות ברצף.
+            לכן 4 הוא IV ולא IIII.
+          </div>
+          <div class="rule">
+            <strong>V, L, D לא חוזרות:</strong> את V, L, D לא כותבים פעמיים ברצף.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>דוגמאות מהירות</h2>
+        <div class="examples">
+          <div class="chip">7 = VII</div>
+          <div class="chip">9 = IX</div>
+          <div class="chip">12 = XII</div>
+          <div class="chip">19 = XIX</div>
+          <div class="chip">24 = XXIV</div>
+          <div class="chip">42 = XLII</div>
+        </div>
+      </section>
+
+      <section class="section aside">
+        <div>
+          <h2>איפה רואים את זה היום?</h2>
+          <p>
+            ספרות רומיות מופיעות בשעונים אנלוגיים, בשמות של סרטים (כמו Rocky II),
+            על בניינים היסטוריים, ואפילו במשחקי מחשב.
+          </p>
+          <p class="tagline">כשתראו IV על שעון, תדעו שזה 4!</p>
+        </div>
+        <img
+          src="output/imagegen/roman-scroll.png"
+          alt="איור של קלף עתיק עם סמלים רומיים"
+        />
+      </section>
+
+      <section class="section">
+        <h2>תרגול עצמי 🎯</h2>
+        <div class="grid two">
+          <div class="exercise">
+            <label for="q1">תרגיל 1: כתבו 3 בספרות רומיות</label>
+            <input id="q1" type="text" placeholder="הקלידו כאן" data-expected="III" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: כאן רק מחברים קווים זהים.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q2">תרגיל 2: כתבו 5 בספרות רומיות</label>
+            <input id="q2" type="text" placeholder="הקלידו כאן" data-expected="V" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: זכרו את הסימן של כף יד פתוחה.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q3">תרגיל 3: מה הערך של VII?</label>
+            <input id="q3" type="text" placeholder="הקלידו כאן" data-expected="7" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: V זה 5 ועוד שני I.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q4">תרגיל 4: כתבו 9 בספרות רומיות</label>
+            <input id="q4" type="text" placeholder="הקלידו כאן" data-expected="IX" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: קטן לפני גדול = חיסור.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q5">תרגיל 5: מה הערך של XII?</label>
+            <input id="q5" type="text" placeholder="הקלידו כאן" data-expected="12" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: X זה 10, ועוד שני I.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q6">תרגיל 6: כתבו 14 בספרות רומיות</label>
+            <input id="q6" type="text" placeholder="הקלידו כאן" data-expected="XIV" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 10 ועוד 4, ו-4 נכתב עם חיסור.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q7">תרגיל 7: מה הערך של XIX?</label>
+            <input id="q7" type="text" placeholder="הקלידו כאן" data-expected="19" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 10 ועוד 9.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q8">תרגיל 8: כתבו 24 בספרות רומיות</label>
+            <input id="q8" type="text" placeholder="הקלידו כאן" data-expected="XXIV" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 20 זה XX ו-4 זה IV.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q9">תרגיל 9: מה הערך של XLII?</label>
+            <input id="q9" type="text" placeholder="הקלידו כאן" data-expected="42" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: XL זה 40 ועוד 2.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q10">תרגיל 10: כתבו 48 בספרות רומיות</label>
+            <input id="q10" type="text" placeholder="הקלידו כאן" data-expected="XLVIII" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 40 זה XL ועוד 8 זה VIII.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q11">תרגיל 11: מה הערך של LIX?</label>
+            <input id="q11" type="text" placeholder="הקלידו כאן" data-expected="59" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: L זה 50 ועוד IX זה 9.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q12">תרגיל 12: כתבו 94 בספרות רומיות</label>
+            <input id="q12" type="text" placeholder="הקלידו כאן" data-expected="XCIV" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 90 זה XC ו-4 זה IV.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q13">תרגיל 13: מה הערך של CD?</label>
+            <input id="q13" type="text" placeholder="הקלידו כאן" data-expected="400" data-kind="number" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: C לפני D אומר חיסור.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+          <div class="exercise">
+            <label for="q14">תרגיל 14: כתבו 1,023 בספרות רומיות</label>
+            <input id="q14" type="text" placeholder="הקלידו כאן" data-expected="MXXIII" data-kind="roman" />
+            <button class="hint-btn" type="button" aria-expanded="false">רמז</button>
+            <button class="check-btn" type="button">בדוק תשובה</button>
+            <div class="hint is-hidden">רמז: 1000 זה M, ועוד 23 זה XXIII.</div>
+            <div class="exercise-feedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer-note">סיימתם? נסו לכתוב את שנת הלידה שלכם בספרות רומיות!</p>
+    </div>
+
+    <script>
+      const normalizeRoman = (value) => value.trim().toUpperCase();
+      const normalizeNumber = (value) => value.trim();
+
+      document.querySelectorAll(".hint-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const hint = button.nextElementSibling;
+          const isHidden = hint.classList.toggle("is-hidden");
+          button.setAttribute("aria-expanded", String(!isHidden));
+        });
+      });
+
+      document.querySelectorAll(".check-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const exercise = button.closest(".exercise");
+          const input = exercise.querySelector("input[data-expected]");
+          const feedback = exercise.querySelector(".exercise-feedback");
+          const expected = input.dataset.expected || "";
+          const kind = input.dataset.kind || "roman";
+          const normalized = kind === "number" ? normalizeNumber(input.value) : normalizeRoman(input.value);
+          const ok = normalized === expected;
+
+          input.style.borderColor = ok ? "#34d399" : "#fb7185";
+          if (ok) {
+            feedback.textContent = "מצוין! זה נכון.";
+            feedback.className = "exercise-feedback good";
+          } else {
+            feedback.textContent = "כמעט! נסו שוב או השתמשו ברמז.";
+            feedback.className = "exercise-feedback bad";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
