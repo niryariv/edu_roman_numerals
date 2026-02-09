@@ -616,7 +616,11 @@
 
       document.querySelectorAll(".hint-btn").forEach((button) => {
         button.addEventListener("click", () => {
-          const hint = button.nextElementSibling;
+          const exercise = button.closest(".exercise");
+          const hint = exercise ? exercise.querySelector(".hint") : null;
+          if (!hint) {
+            return;
+          }
           const isHidden = hint.classList.toggle("is-hidden");
           button.setAttribute("aria-expanded", String(!isHidden));
         });
