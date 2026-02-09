@@ -46,18 +46,24 @@
       }
 
       header {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 24px;
-        align-items: center;
+        display: block;
+        text-align: center;
         margin-bottom: 32px;
+        padding: 48px 24px;
+        border-radius: var(--radius);
+        background-image: url("output/imagegen/roman-hero.png");
+        background-size: cover;
+        background-position: center;
+        box-shadow: var(--shadow);
       }
 
       .hero {
-        background: var(--card);
+        background: rgba(255, 255, 255, 0.86);
         padding: 28px;
         border-radius: var(--radius);
-        box-shadow: var(--shadow);
+        box-shadow: none;
+        max-width: 720px;
+        margin: 0 auto;
       }
 
       .hero h1 {
@@ -78,13 +84,6 @@
         border-radius: 999px;
         font-weight: 600;
         font-size: 0.9rem;
-      }
-
-      .hero img {
-        width: 100%;
-        border-radius: 18px;
-        border: 4px solid #fff5;
-        box-shadow: 0 12px 25px rgba(255, 140, 90, 0.25);
       }
 
       .section {
@@ -280,10 +279,6 @@
       }
 
       @media (max-width: 800px) {
-        header {
-          grid-template-columns: 1fr;
-        }
-
         .aside {
           grid-template-columns: 1fr;
         }
@@ -295,17 +290,13 @@
       <header>
         <div class="hero">
           <span class="pill">ברוכים הבאים למסע בזמן!</span>
-          <h1>שיעור כיפי: ספרות רומיות</h1>
+          <h1>ספרות רומיות</h1>
           <p>
             נלמד איך הרומאים ספרו, למה הם השתמשו באותיות במקום מספרים,
             ואיך גם היום אפשר לראות ספרות רומיות בשעונים, בסרטים ובבניינים.
           </p>
           <p class="tagline">מתאים לגילאי 10-12 · זמן למידה: 20-30 דקות</p>
         </div>
-        <img
-          src="output/imagegen/roman-hero.png"
-          alt="איור כיפי של כיתה רומאית צבעונית"
-        />
       </header>
 
       <section class="section">
@@ -393,6 +384,16 @@
             <strong>V, L, D לא חוזרות:</strong> את V, L, D לא כותבים פעמיים ברצף.
           </div>
         </div>
+        <div class="grid two" style="margin-top: 14px;">
+          <div class="rule">
+            <strong>חיסור מותר רק בצעדים:</strong> I יכול להיות לפני V או X,
+            X לפני L או C, ו-C לפני D או M.
+          </div>
+          <div class="rule">
+            <strong>בונים משמאל לימין:</strong> קודם אלפים, אחר כך מאות, עשרות ואז
+            יחידות. למשל: 1,642 = M + DC + XL + II.
+          </div>
+        </div>
       </section>
 
       <section class="section">
@@ -404,6 +405,45 @@
           <div class="chip">19 = XIX</div>
           <div class="chip">24 = XXIV</div>
           <div class="chip">42 = XLII</div>
+          <div class="chip">58 = LVIII</div>
+          <div class="chip">90 = XC</div>
+          <div class="chip">94 = XCIV</div>
+          <div class="chip">146 = CXLVI</div>
+          <div class="chip">399 = CCCXCIX</div>
+          <div class="chip">944 = CMXLIV</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>איך מרכיבים מספרים?</h2>
+        <div class="grid two">
+          <div class="rule">
+            <strong>דוגמה 1:</strong> 28 = 20 + 8 → XX + VIII = XXVIII.
+          </div>
+          <div class="rule">
+            <strong>דוגמה 2:</strong> 49 = 40 + 9 → XL + IX = XLIX.
+          </div>
+          <div class="rule">
+            <strong>דוגמה 3:</strong> 73 = 50 + 20 + 3 → L + XX + III = LXXIII.
+          </div>
+          <div class="rule">
+            <strong>דוגמה 4:</strong> 512 = 500 + 10 + 2 → D + X + II = DXII.
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="display: none;">
+        <h2>בואו נבנה מספר בעצמנו</h2>
+        <div class="grid two">
+          <div>
+            הכניסו מספר בין 1 ל-3,999 ותקבלו את הכתיבה הרומית.
+          </div>
+          <div class="exercise">
+            <label for="convert-input">המרת מספר לספרות רומיות</label>
+            <input id="convert-input" type="number" min="1" max="3999" placeholder="לדוגמה: 1987" />
+            <button class="btn" id="convert-btn" type="button">המר</button>
+            <div class="feedback" id="convert-output" aria-live="polite"></div>
+          </div>
         </div>
       </section>
 
@@ -546,6 +586,33 @@
     <script>
       const normalizeRoman = (value) => value.trim().toUpperCase();
       const normalizeNumber = (value) => value.trim();
+      const romanPairs = [
+        [1000, "M"],
+        [900, "CM"],
+        [500, "D"],
+        [400, "CD"],
+        [100, "C"],
+        [90, "XC"],
+        [50, "L"],
+        [40, "XL"],
+        [10, "X"],
+        [9, "IX"],
+        [5, "V"],
+        [4, "IV"],
+        [1, "I"],
+      ];
+
+      const toRoman = (number) => {
+        let result = "";
+        let remaining = number;
+        romanPairs.forEach(([value, symbol]) => {
+          while (remaining >= value) {
+            result += symbol;
+            remaining -= value;
+          }
+        });
+        return result;
+      };
 
       document.querySelectorAll(".hint-btn").forEach((button) => {
         button.addEventListener("click", () => {
@@ -575,6 +642,23 @@
           }
         });
       });
+
+      const convertInput = document.getElementById("convert-input");
+      const convertButton = document.getElementById("convert-btn");
+      const convertOutput = document.getElementById("convert-output");
+
+      if (convertButton) {
+        convertButton.addEventListener("click", () => {
+          const value = Number(convertInput.value);
+          if (!Number.isInteger(value) || value < 1 || value > 3999) {
+            convertOutput.textContent = "נא לבחור מספר שלם בין 1 ל-3,999.";
+            convertOutput.className = "feedback bad";
+            return;
+          }
+          convertOutput.textContent = `התוצאה: ${toRoman(value)}`;
+          convertOutput.className = "feedback good";
+        });
+      }
     </script>
   </body>
 </html>
