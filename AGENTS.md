@@ -1,35 +1,19 @@
-# Repository Guidelines
+# Lesson Repo Guidance
 
-## Project Structure & Module Organization
+This repository is part of the `niryariv/edu` open lesson collection.
 
-This repository currently has no tracked source files or directories. As the project is established, document the layout here (for example: `src/` for application code, `tests/` for automated tests, and `assets/` for static files). Keep this section updated so contributors can quickly locate modules and shared utilities.
+When creating or updating lessons here:
 
-## Build, Test, and Development Commands
+- Follow the shared lesson-builder skill: `https://github.com/niryariv/edu/blob/main/skills/lesson-builder/SKILL.md`
+- Use the active lesson prompt: `https://github.com/niryariv/edu/blob/main/prompts/lesson-builder.md`
+- Keep the student-facing experience in Hebrew unless the user explicitly asks otherwise.
+- Put the learning experience on the first screen, not a marketing page.
+- Prefer static HTML/CSS/JS unless the existing repo already uses another stack or the lesson genuinely needs one.
+- Include concrete examples, visual explanations, hints, and interactive practice with immediate feedback.
+- Make sure text and controls fit on mobile and desktop without overlap or horizontal scrolling.
+- Keep links to the live lesson, this source repository, and the main `edu` index easy to find.
+- If the live URL, source repo, lesson title, or major scope changes, update `https://github.com/niryariv/edu`.
+- Add/update a short prompt iteration note in the main `edu` repo when the lesson-building process changes.
 
-No build or runtime tooling is configured yet. Once you add a build system or package manager, list the exact commands contributors should use. Examples to include:
-
-- `npm install` to install dependencies.
-- `npm run dev` to start a local dev server.
-- `npm test` to run the test suite.
-
-If you use a different toolchain (for example `make`, `poetry`, or `cargo`), replace the examples with the real commands.
-
-## Coding Style & Naming Conventions
-
-There are no formatting or linting rules defined yet. When you introduce them, note the indentation (spaces vs. tabs), naming patterns (for example `camelCase` or `snake_case`), and any automated formatters or linters (for example `prettier`, `eslint`, or `ruff`). Include the exact command used to format or lint.
-
-## Testing Guidelines
-
-No test framework is configured yet. When tests are added, document the framework (for example Jest, Pytest, or Go test), test file naming conventions (for example `*.test.ts`), and how to run all tests and a single test.
-
-## Commit & Pull Request Guidelines
-
-There is no commit history in this repository, so no established convention is visible. If you adopt a standard (for example Conventional Commits like `feat:` and `fix:`), document it here. For pull requests, include:
-
-- A short, focused description of the change.
-- Any linked issues or tickets.
-- Screenshots or logs when UI or behavior changes.
-
-## Agent-Specific Instructions
-
-If you add automated agents or CI workflows, document how they should be run locally and any constraints (for example, required environment variables or configuration files).
+Main index: `https://niryariv.github.io/edu/`
+Main source: `https://github.com/niryariv/edu`
