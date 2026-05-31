@@ -283,7 +283,31 @@
           grid-template-columns: 1fr;
         }
       }
-    </style>
+    
+      .open-lesson-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin: 18px auto;
+        max-width: 900px;
+      }
+
+      .open-lesson-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 8px 12px;
+        border: 1px solid rgba(47, 128, 237, 0.28);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #1f5fbf;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+</style>
   </head>
   <body>
     <div class="wrap">
@@ -661,7 +685,12 @@
         <button class="btn" id="more-exercises" type="button">עוד תרגילים</button>
       </section>
 
-      <p class="footer-note">סיימתם? נסו לכתוב את שנת הלידה שלכם בספרות רומיות!</p>
+            <nav class="open-lesson-links" aria-label="קישורי קוד פתוח">
+        <a href="https://niryariv.github.io/edu/">אינדקס edu</a>
+        <a href="https://github.com/niryariv/edu_roman_numerals">קוד מקור</a>
+        <a href="https://github.com/niryariv/edu/blob/main/prompts/lesson-builder.md">Prompt</a>
+      </nav>
+<p class="footer-note">סיימתם? נסו לכתוב את שנת הלידה שלכם בספרות רומיות!</p>
     </div>
 
     <script>
